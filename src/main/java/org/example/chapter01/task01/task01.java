@@ -1,25 +1,19 @@
 package org.example.chapter01.task01;
 
 import java.util.Scanner;
+import org.example.chapter01.correctInput;
+import java.util.NoSuchElementException;
 
 public class task01 {
     public static void main(String[] args){
-        int num = 0;
-        boolean flag = false;
         Scanner in = new Scanner(System.in);
-        while(!flag) {
-            System.out.print("Enter a number: ");
-            if (!in.hasNext()) {
-                System.out.println("End of input");
-                break;
-            }
-            if (in.hasNextInt()) {
-                num = in.nextInt();
-                flag = true;
-            } else {
-                System.out.println("Not a number entered");
-                in.next();
-            }
+        boolean flag = false;
+        int num = 0;
+        try {
+            num = correctInput.readInt(in, "Enter a number: ");
+            flag = true;
+        } catch(NoSuchElementException e){
+            System.out.println(e.getMessage());
         }
         if(flag){
             System.out.println("bin: " + Integer.toString(num, 2));
