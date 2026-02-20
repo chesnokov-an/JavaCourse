@@ -1,9 +1,9 @@
-package org.example.chapter01;
+package org.example.chapter01.util;
 
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
-public class correctInput {
+public class CorrectInput {
     public static int readInt(Scanner scanner, String message) {
         int num;
         while (true) {

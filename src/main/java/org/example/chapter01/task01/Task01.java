@@ -1,15 +1,15 @@
 package org.example.chapter01.task01;
 
 import java.util.Scanner;
-import org.example.chapter01.correctInput;
+import org.example.chapter01.util.CorrectInput;
 import java.util.NoSuchElementException;
 
-public class task01 {
+public class Task01 {
     static void main(){
         Scanner in = new Scanner(System.in);
         int num;
         try {
-            num = correctInput.readInt(in, "Enter a number: ");
+            num = CorrectInput.readInt(in, "Enter a number: ");
         } catch(NoSuchElementException e){
             System.out.println(e.getMessage());
             return;
