@@ -11,8 +11,8 @@ public class Task03 {
         Scanner in = new Scanner(System.in);
         try {
             a = CorrectInput.readInt(in, "Enter a first number: ");
-            b = CorrectInput.readInt(in, "Enter a first number: ");
-            c = CorrectInput.readInt(in, "Enter a first number: ");
+            b = CorrectInput.readInt(in, "Enter a second number: ");
+            c = CorrectInput.readInt(in, "Enter a third number: ");
         } catch(NoSuchElementException e){
             System.out.println(e.getMessage());
             return;
