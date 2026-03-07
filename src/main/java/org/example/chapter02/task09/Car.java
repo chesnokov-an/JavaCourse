@@ -30,15 +30,12 @@ public class Car {
     }
 
     public void drive(double km) {
-        if (km <= 0) {
-            throw new IllegalArgumentException("Расстояние должно быть положительным");
-        }
-        double neededFuel = km / fuelConsumption;
+        double neededFuel = Math.abs(km) / fuelConsumption;
         if (fuel < neededFuel) {
             throw new IllegalStateException("Недостаточно топлива");
         }
         fuel -= neededFuel;
-        distance += km;
+        distance += Math.abs(km);
     }
 
     public double maxDistance() {
@@ -49,7 +46,7 @@ public class Car {
         Car myCar = new Car(10);
         myCar.fill(20);
         System.out.println("Топливо: " + myCar.getFuelLevel() + ", пробег: " + myCar.getDistance());
-        myCar.drive(50);
+        myCar.drive(-50);
         System.out.println("После 50 км: топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getDistance());
         myCar.drive(100);
         System.out.println("После ещё 100 км: топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getDistance());
