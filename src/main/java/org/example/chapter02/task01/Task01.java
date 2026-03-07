@@ -11,7 +11,6 @@ public class Task01 {
         int month = in.nextInt();
         System.out.print("Введите год: ");
         int year = in.nextInt();
-
         System.out.println(" Sun Mon Tue Wed Thu Fri Sat");
 
         LocalDate date = LocalDate.of(year, month, 1);
