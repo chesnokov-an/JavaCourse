@@ -3,23 +3,35 @@ package org.example.chapter02.task09;
 public class Car {
     private final double fuelConsumption;
     private double fuel;
-    private double distance;
+    private double totalDistance;
+    private double x;
+    private double y;
 
     public Car(double fuelConsumption) {
         if (fuelConsumption <= 0) {
             throw new IllegalArgumentException("Расход топлива должен быть положительным");
         }
         this.fuelConsumption = fuelConsumption;
-        fuel = 0;
-        distance = 0;
+        this.fuel = 0;
+        this.totalDistance = 0;
+        this.x = 0;
+        this.y = 0;
     }
 
     public double getFuelLevel() {
         return fuel;
     }
 
-    public double getDistance() {
-        return distance;
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public void fill(double liters) {
@@ -29,27 +41,34 @@ public class Car {
         fuel += liters;
     }
 
-    public void drive(double km) {
-        double neededFuel = Math.abs(km) / fuelConsumption;
+    public void move(double dx, double dy) {
+        double distance = Math.hypot(dx, dy); // длина вектора перемещения
+        if (distance == 0) return;
+        double neededFuel = distance / fuelConsumption;
         if (fuel < neededFuel) {
             throw new IllegalStateException("Недостаточно топлива");
         }
         fuel -= neededFuel;
-        distance += Math.abs(km);
+        totalDistance += distance;
+        x += dx;
+        y += dy;
     }
 
     public double maxDistance() {
         return fuel * fuelConsumption;
     }
 
-    static void main() {
+    public static void main(String[] args) {
         Car myCar = new Car(10);
         myCar.fill(20);
-        System.out.println("Топливо: " + myCar.getFuelLevel() + ", пробег: " + myCar.getDistance());
-        myCar.drive(-50);
-        System.out.println("После 50 км: топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getDistance());
-        myCar.drive(100);
-        System.out.println("После ещё 100 км: топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getDistance());
+        System.out.println("Топливо: " + myCar.getFuelLevel() + ", пробег: " + myCar.getTotalDistance() +
+                ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
+        myCar.move(30, 40); // расстояние 50 км
+        System.out.println("После move(30,40): топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getTotalDistance() +
+                ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
+        myCar.move(-10, 0);
+        System.out.println("После move(-10,0): топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getTotalDistance() +
+                ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
         System.out.println("Ещё может проехать: " + myCar.maxDistance());
     }
 }

@@ -1,5 +1,8 @@
 package org.example.chapter02.task16;
 
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
+
 public class Queue {
     private static class Node {
         String data;
@@ -32,18 +35,32 @@ public class Queue {
         return head == null;
     }
 
-    public class Iterator {
+    public class Iterator implements java.util.Iterator<String> {
         private Node current = head;
 
+        @Override
         public boolean hasNext() {
             return current != null;
         }
 
+        @Override
         public String next() {
-            if (!hasNext()) throw new java.util.NoSuchElementException();
+            if (!hasNext()) throw new NoSuchElementException();
             String data = current.data;
             current = current.next;
             return data;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super String> action) {
+            while (hasNext()) {
+                action.accept(next());
+            }
         }
     }
 
@@ -62,11 +79,11 @@ public class Queue {
             System.out.println(it.next());
         }
 
-        System.out.println("\nУдаляем элементы:");
-        System.out.println("Удалён: " + queue.remove());
-        System.out.println("Удалён: " + queue.remove());
-        System.out.println("Удалён: " + queue.remove());
-        System.out.println("Очередь пуста? " + queue.isEmpty());
+        System.out.println("\nRemove elements:");
+        System.out.println("Removed: " + queue.remove());
+        System.out.println("Removed: " + queue.remove());
+        System.out.println("Removed: " + queue.remove());
+        System.out.println("Is queue empty? " + queue.isEmpty());
     }
 }
 
