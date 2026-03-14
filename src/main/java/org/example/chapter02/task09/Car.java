@@ -63,12 +63,15 @@ public class Car {
         myCar.fill(20);
         System.out.println("Топливо: " + myCar.getFuelLevel() + ", пробег: " + myCar.getTotalDistance() +
                 ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
-        myCar.move(30, 40); // расстояние 50 км
+
+        myCar.move(30, 40);
         System.out.println("После move(30,40): топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getTotalDistance() +
                 ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
+
         myCar.move(-10, 0);
         System.out.println("После move(-10,0): топливо " + myCar.getFuelLevel() + ", пробег " + myCar.getTotalDistance() +
                 ", координаты: (" + myCar.getX() + ", " + myCar.getY() + ")");
+
         System.out.println("Ещё может проехать: " + myCar.maxDistance());
     }
 }
