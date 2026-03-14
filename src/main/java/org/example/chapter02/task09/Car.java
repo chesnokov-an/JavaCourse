@@ -1,5 +1,7 @@
 package org.example.chapter02.task09;
 
+import java.util.Queue;
+
 public class Car {
     private final double fuelConsumption;
     private double fuel;

@@ -37,6 +37,8 @@ public class Queue {
 
     public class Iterator implements java.util.Iterator<String> {
         private Node current = head;
+        private Node preNode = null;
+        private Node prePreNode = null;
 
         @Override
         public boolean hasNext() {
@@ -47,13 +49,20 @@ public class Queue {
         public String next() {
             if (!hasNext()) throw new NoSuchElementException();
             String data = current.data;
+            prePreNode = preNode;
+            preNode = current;
             current = current.next;
             return data;
         }
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("remove");
+            if(preNode == null) throw new NoSuchElementException();
+            if(preNode == head){
+                head = current;
+                return;
+            }
+            prePreNode.next = current;
         }
 
         @Override
@@ -74,6 +83,8 @@ public class Queue {
         queue.add("2");
         queue.add("3");
         queue.add("4");
+        queue.add("5");
+        queue.add("6");
 
         Queue.Iterator it = queue.iterator();
         it.forEachRemaining(System.out::println);
@@ -83,8 +94,11 @@ public class Queue {
         System.out.println("Is queue empty? " + queue.isEmpty());
 
         Queue.Iterator it2 = queue.iterator();
-        if (it2.hasNext()) it2.next();
-        it2.forEachRemaining(s -> System.out.println("Stayed: " + s));
+        it2.next();
+        it2.next();
+        it2.remove();
+        Queue.Iterator it3 = queue.iterator();
+        it3.forEachRemaining(s -> System.out.println("Stayed: " + s));
     }
 }
 
