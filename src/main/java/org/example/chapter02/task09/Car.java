@@ -42,7 +42,7 @@ public class Car {
     }
 
     public void move(double dx, double dy) {
-        double distance = Math.hypot(dx, dy); // длина вектора перемещения
+        double distance = Math.hypot(dx, dy);
         if (distance == 0) return;
         double neededFuel = distance / fuelConsumption;
         if (fuel < neededFuel) {
@@ -58,7 +58,7 @@ public class Car {
         return fuel * fuelConsumption;
     }
 
-    public static void main(String[] args) {
+    static void main() {
         Car myCar = new Car(10);
         myCar.fill(20);
         System.out.println("Топливо: " + myCar.getFuelLevel() + ", пробег: " + myCar.getTotalDistance() +

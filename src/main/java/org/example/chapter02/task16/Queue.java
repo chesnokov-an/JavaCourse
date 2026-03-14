@@ -73,17 +73,18 @@ public class Queue {
         queue.add("1");
         queue.add("2");
         queue.add("3");
+        queue.add("4");
 
         Queue.Iterator it = queue.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
+        it.forEachRemaining(System.out::println);
 
         System.out.println("\nRemove elements:");
         System.out.println("Removed: " + queue.remove());
-        System.out.println("Removed: " + queue.remove());
-        System.out.println("Removed: " + queue.remove());
         System.out.println("Is queue empty? " + queue.isEmpty());
+
+        Queue.Iterator it2 = queue.iterator();
+        if (it2.hasNext()) it2.next();
+        it2.forEachRemaining(s -> System.out.println("Stayed: " + s));
     }
 }
 
