@@ -32,10 +32,8 @@ public class TaskRunner {
 
         System.out.println("runInOrder");
         TaskRunner.runInOrder(task1, task2, task3);
-        // Вывод: сначала все приветствия для Alice (3 раза), потом для Bob (2), потом для Charlie (1)
 
         System.out.println("\nrunTogether");
         TaskRunner.runTogether(task1, task2, task3);
-        // Вывод: сообщения могут перемешиваться, так как потоки выполняются одновременно
     }
 }
