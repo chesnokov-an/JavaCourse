@@ -11,8 +11,7 @@ public class Main {
         Sphere sphere = new Sphere(new Point(0, 0), 5);
         System.out.printf("Площадь сферы:\t\t\t %.3f\n", sphere.getArea());
 
-        AreaMeasurable[] figures = {triangle, sphere};
-        double avg = AreaUtil.averageArea(figures);
+        double avg = AreaUtil.averageArea(triangle, sphere);
         System.out.printf("Средняя площадь:\t\t %.3f\n", avg);
     }
 }
