@@ -1,4 +1,4 @@
-package org.example.chapter03;
+package org.example.chapter03.method_reference;
 
 import java.util.*;
 
