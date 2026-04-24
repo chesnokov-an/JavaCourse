@@ -39,3 +39,11 @@ public class MethodReference {
 
 // Class::method => первый аргумент становится this
 // obj::method => this уже есть
+
+// Из 4 Главы:
+
+// super::instanceMethod            (args...) -> super.method(args...)
+
+// Важно! super связан с this, поэтому такую ссылку нельзя использовать в static-методах
+// Важно! тут нет динамического полиморфизма: super::instanceMethod всегда вызывает метод родителя,
+// даже если в наследнике он @override
