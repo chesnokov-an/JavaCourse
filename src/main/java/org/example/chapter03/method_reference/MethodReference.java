@@ -11,12 +11,6 @@ public class MethodReference {
         static String getStaticName(Person p) { return p.name; }
     }
 
-//    interface MyFunction {
-//        String apply(Person p);
-//    }
-//
-//    interface NameSupplier { String get(); }
-
     static void main() {
         Person obj = new Person("Sasha");
 
@@ -24,6 +18,7 @@ public class MethodReference {
         // obj передаётся как получатель метода getName() ~ obj.getName()
         Function<Person, String> f1 = Person::getName;
         System.out.println(f1.apply(obj));
+
 
         // 2. Класс::СтатическийМетод
         // obj передаётся как явный аргумент в статический метод ~ Person.getStaticName(obj)
@@ -36,3 +31,11 @@ public class MethodReference {
         System.out.println(f3.get());
     }
 }
+// Компилятор по сигнатуре функционального интерфейса определяет как вызывать метод:
+
+//  Class::instanceMethod	        (obj, args...) -> obj.method(args...)
+//  Class::staticMethod	            (args...) -> Class.method(args...)
+//  obj::instanceMethod	            (args...) -> obj.method(args...)
+
+// Class::method => первый аргумент становится this
+// obj::method => this уже есть
