@@ -1,7 +1,6 @@
 package org.example.chapter04.task09;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.IdentityHashMap;
 
 public class ToString {
