@@ -39,14 +39,22 @@ public class ToString {
     }
 
     static void main(){
-        class Demo{
-            String name = "java";
-            int grade = 2;
-            static int kaf = 12;
-            Demo self;
+        class User {
+            String info;
+            public User(String info) { this.info = info; }
         }
-        Demo d = new Demo();
-        d.self = d;
-        System.out.println(ToString.toString(d));
+
+        class Message {
+            String body;
+            User sender;
+            Message self;
+            Message(String body, User sender){
+                this.body = body;
+                this.sender = sender;
+                self = this;
+            }
+        }
+        Message m = new Message("Hi", new User("Sasha"));
+        System.out.println(ToString.toString(m));
     }
 }

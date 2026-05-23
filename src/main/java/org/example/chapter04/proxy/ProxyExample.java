@@ -3,15 +3,15 @@ package org.example.chapter04.proxy;
 import java.lang.reflect.*;
 
 public class ProxyExample {
-    interface Sayeble {
+    interface Sayable {
         String say(String name);
     }
 
-    interface Writeble {
+    interface Writable {
         String write(String message);
     }
 
-    static class HelloImpl implements Sayeble, Writeble {
+    static class HelloImpl implements Sayable, Writable {
         public String say(String name) {
             return "Привет, " + name + "!";
         }
@@ -24,7 +24,7 @@ public class ProxyExample {
     static void main() {
         HelloImpl real = new HelloImpl();
 
-        Object proxy = (Sayeble) Proxy.newProxyInstance(
+        Object proxy = Proxy.newProxyInstance(
                 ProxyExample.class.getClassLoader(),
                 real.getClass().getInterfaces(),
                 (Object p, Method m, Object[] a) -> {
@@ -35,7 +35,7 @@ public class ProxyExample {
                 }
         );
 
-//        System.out.println(proxy.say("Мир"));
-//        System.out.println(proxy.write("Мир"));
+        System.out.println(((Sayable)proxy).say("Мир"));
+        System.out.println(((Writable)proxy).write("Мир"));
     }
 }

@@ -29,8 +29,8 @@ public class DeepCopy {
             while(cl != null){
                 for(Field field : cl.getDeclaredFields()){
                     field.setAccessible(true);
-                    Object ordinal = field.get(obj);
-                    Object copied = copy(ordinal, visited);
+                    Object tmp = field.get(obj);
+                    Object copied = copy(tmp, visited);
                     field.set(copy_obj, copied);
                 }
                 cl = cl.getSuperclass();
