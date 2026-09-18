@@ -8,7 +8,7 @@ public class DeepCopy {
         return copy(obj, new IdentityHashMap<>());
     }
 
-    private static Object copy(Object obj, IdentityHashMap<Object, Object> visited){
+    private static Object copy(Object obj, IdentityHashMap<Object, Void> visited){
         if(obj == null) return null;
 
         Class<?> cl = obj.getClass();

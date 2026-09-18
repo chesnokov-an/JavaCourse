@@ -1,5 +1,6 @@
 package org.example.chapter04.task09;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.IdentityHashMap;
 
@@ -8,7 +9,7 @@ public class ToString {
         return toString(obj, new IdentityHashMap<>());
     }
 
-    private static String toString(Object obj, IdentityHashMap<Object, Object> visited){
+    private static String toString(Object obj, IdentityHashMap<Object, Void> visited){
         if(obj == null) return "null";
         Class<?> cl = obj.getClass();
         if(cl.isPrimitive() || cl == String.class ||
@@ -19,6 +20,19 @@ public class ToString {
         visited.put(obj, null);
 
         StringBuilder sb = new StringBuilder();
+
+        if(cl.isArray()){
+            sb.append("{");
+            int length = Array.getLength(obj);
+            for(int i = 0; i < length; i++){
+                Object val = Array.get(obj, i);
+                sb.append(toString(val, visited));
+                if (i < length - 1) sb.append(", ");
+            }
+            sb.append("}");
+            return sb.toString();
+        }
+
         sb.append(cl.getSimpleName()).append("[");
 
         Field[] fields = cl.getDeclaredFields();
@@ -48,10 +62,12 @@ public class ToString {
             String body;
             User sender;
             Message self;
+            int[] ints;
             Message(String body, User sender){
                 this.body = body;
                 this.sender = sender;
                 self = this;
+                ints = new int[]{1, 2};
             }
         }
         Message m = new Message("Hi", new User("Sasha"));

@@ -19,6 +19,13 @@ public class Task12 {
             sqrtMethod.invoke(null, i);
         }
         end = System.nanoTime();
-        System.out.println("Рефлексия: " + (end - start) / 1000000 + " мс");
+        System.out.println("Рефлексия с ссылкой: " + (end - start) / 1000000 + " мс");
+
+        start = System.nanoTime();
+        for(double i = 0; i < iterations; i++){
+            Math.class.getMethod("sqrt", double.class).invoke(null, i);
+        }
+        end = System.nanoTime();
+        System.out.println("Рефлексия с ссылкой: " + (end - start) / 1000000 + " мс");
     }
 }
