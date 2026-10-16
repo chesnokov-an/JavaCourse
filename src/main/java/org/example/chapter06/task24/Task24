@@ -1,0 +1,40 @@
+Class<?> означает класс какого-то неизвестного типа
+
+String name = clazz.getName();
+String simple = clazz.getSimpleName();
+String canonical = clazz.getCanonicalName();
+String typeName = clazz.getTypeName();
+int mods = clazz.getModifiers();
+String s = clazz.toString();
+String gs = clazz.toGenericString();
+
+clazz.isInterface();
+clazz.isEnum();
+clazz.isArray();
+clazz.isPrimitive();
+clazz.isAnnotation();
+clazz.isSynthetic();
+clazz.isAnonymousClass();
+clazz.isLocalClass();
+clazz.isMemberClass();
+clazz.isAssignableFrom(other);
+clazz.isInstance(obj);
+
+Class<?> sup = clazz.getSuperclass();
+Class<?>[] ifaces = clazz.getInterfaces();
+Class<?> comp = clazz.getComponentType();
+Class<?> decl = clazz.getDeclaringClass();
+Class<?> encl = clazz.getEnclosingClass();
+Package pkg = clazz.getPackage();
+ClassLoader cl = clazz.getClassLoader();
+TypeVariable<?>[] vars = clazz.getTypeParameters();
+
+Method[] methods = clazz.getMethods();
+Field[] fields = clazz.getFields();
+Constructor<?>[] ctors = clazz.getConstructors();
+Method m = clazz.getMethod("foo", String.class);
+Field f = clazz.getField("bar");
+Constructor<?> c = clazz.getConstructor(int.class);
+Annotation[] anns = clazz.getAnnotations();
+<A extends Annotation> A a = clazz.getAnnotation(SomeAnnotation.class);
+boolean has = clazz.isAnnotationPresent(SomeAnnotation.class);

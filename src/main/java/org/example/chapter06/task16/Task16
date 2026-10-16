@@ -1,0 +1,18 @@
+1.
+
+    public static <T extends Comparable<? super T>> void sort(List<T> list)
+
+    T стирается до Comparable
+    List<T> стирается до List
+
+    public static void sort(List list)
+
+2.
+    public static <T extends Object & Comparable<? super T>> T max(Collection<? extends T> coll)
+
+    T стирается до Object
+    Collection<? extends T> стирается до Collection
+
+    public static Object max(Collection coll)
+
+    Добавив Object первым ограничением заставили стирание использовать Object как возвращаемый тип

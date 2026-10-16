@@ -1,0 +1,11 @@
+int при автоупаковке становится Integer => T должен быть Integer
+int[]::new — это ссылка на конструктор массива int[]
+
+из obj следует T = Integer, из constr — T = int
+
+--------
+Использовать массив обёрток, а не примитивов:
+Integer[] result = Arrays.repeat(10, 42, Integer[]::new);
+
+
+
