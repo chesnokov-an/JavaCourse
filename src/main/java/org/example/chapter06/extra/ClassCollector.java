@@ -4,19 +4,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.lang.instrument.Instrumentation;
-import java.util.*;
-import java.math.*;
-import java.util.concurrent.atomic.*;
 
 public class ClassCollector {
-
-    static Instrumentation inst;
 
     Number number;
     CharSequence text;
     List<String> names;
 
-    // Вызывается при запуске Java Agent
+    static Instrumentation inst;
+
     public static void premain(String args, Instrumentation i) {
         inst = i;
     }
@@ -26,7 +22,7 @@ public class ClassCollector {
         Class<?> type = f.getType();
 
         if (inst == null) {
-            throw new IllegalStateException("Запустите программу с Java Agent");
+            throw new IllegalStateException("java agent не запущен");
         }
 
         for (Class<?> c : inst.getAllLoadedClasses()) {
@@ -37,11 +33,11 @@ public class ClassCollector {
                 result.add(c);
             }
         }
-        result.sort((a, b) -> a.getName().compareTo(b.getName()));
+        result.sort(Comparator.comparing(Class::getName));
         return result;
     }
 
-    static void main() throws Exception {
+    public static void main(String[] args) throws Exception {
         String[] fields = {"number", "text", "names"};
         for (String name : fields) {
             Field f = ClassCollector.class.getDeclaredField(name);

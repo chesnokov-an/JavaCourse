@@ -1,0 +1,2 @@
+org.example.chapter04.loader.MilesToKilometersConverter formal
+org.example.chapter04.loader.CelsiusToFahrenheitConverter casual

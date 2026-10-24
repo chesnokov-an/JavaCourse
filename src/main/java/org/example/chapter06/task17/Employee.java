@@ -18,7 +18,7 @@ public class Employee implements Comparable<Employee> {
         Employee a = new Employee("Alice", 5000);
         Employee b = new Employee("Bob", 4000);
         Comparable<Employee> c = a;
-        System.out.println(c.compareTo(b)); // без мостового метода вызов через интерфейсную ссылку не нашёл бы нужный метод:
+        System.out.println(c.compareTo(b)); // без мостового метода вызов через интерфейсную ссылку не нашёл бы нужный метод
     }
 }
 

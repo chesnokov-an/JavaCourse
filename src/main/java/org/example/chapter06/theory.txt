@@ -11,10 +11,8 @@
 - Массивы.
 
 Если класс Sub является подклассом Super, то массив Sub[] является подтипом Super[].
-Например, код
     String[] strArray = new String[5];
     Object[] objArray = strArray;
-абсолютно легален с точки зрения компилятора.
 
 2) PECS - Producer Extends, Consumer Super
 
