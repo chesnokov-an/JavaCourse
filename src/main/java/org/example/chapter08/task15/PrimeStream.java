@@ -11,7 +11,7 @@ public class PrimeStream {
         Stream<BigInteger> candidates = LongStream.range(0, Long.MAX_VALUE)
                 .mapToObj(i -> start.add(BigInteger.TWO.multiply(BigInteger.valueOf(i))));
         if (parallel) {
-            // unordered() позволяет не сохранять порядок и эффективно распараллелить limit()
+            // unordered позволяет не сохранять порядок и эффективно распараллелить limit()
             candidates = candidates.parallel().unordered();
         }
 
@@ -34,6 +34,5 @@ public class PrimeStream {
     static void main() {
         long sequential = measure(500, false);
         long parallel = measure(500, true);
-        System.out.println("Ускорение: " + (double) sequential / Math.max(1, parallel) + "x");
     }
 }

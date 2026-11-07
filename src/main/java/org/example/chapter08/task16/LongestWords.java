@@ -38,8 +38,7 @@ public class LongestWords {
         long parallelTime = System.currentTimeMillis() - start;
 
         System.out.println("Слов в тексте: " + words.size());
-        System.out.println("Найдено: " + sequential.size() + " / " + parallel.size());
-        System.out.println("Первые 10: " + sequential.subList(0, Math.min(10, sequential.size())));
+        System.out.println("Первые 10: " + sequential.subList(0, 10));
         System.out.println("stream():         " + sequentialTime + " мс");
         System.out.println("parallelStream(): " + parallelTime + " мс");
     }

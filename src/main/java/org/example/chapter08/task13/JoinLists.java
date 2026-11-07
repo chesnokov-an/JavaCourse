@@ -9,13 +9,13 @@ public class JoinLists {
         return lists.reduce((result, list) -> {
             result.addAll(list);
             return result;
-        }).orElseGet(ArrayList::new);
+        }).orElseGet(ArrayList::new); // первый список становится накопителем, в него addAll остальных
     }
 
     public static <T> ArrayList<T> reduceWithIdentity(Stream<ArrayList<T>> lists) {
         return lists.reduce(new ArrayList<>(), (result, list) -> {
             result.addAll(list);
-            return result;
+            return result; // берём new ArrayList<>() как начальное значение и добавляем в него
         });
     }
 
@@ -26,7 +26,8 @@ public class JoinLists {
         }, (left, right) -> {
             left.addAll(right);
             return left;
-        });
+        }); // третий аргумент нужен для параллельного выполнения:
+            // он сливает частичные списки, полученные в разных потоках
     }
 
     static void main() {

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 public class FiniteCheck {
     public static <T> boolean isFinite(Stream<T> stream) {
         // Конечность можно проверить только полным перебором.
-        // Для бесконечного потока метод никогда не завершится.
+        // Для бесконечного потока он никогда не завершится, а для конечного — полностью его потребит
         Iterator<T> iterator = stream.iterator();
         while (iterator.hasNext()) {
             iterator.next();
@@ -18,6 +18,5 @@ public class FiniteCheck {
         System.out.println("Конечный поток: " + isFinite(Stream.of(1, 2, 3)));
         System.out.println("Ограниченный Stream.iterate: "
                 + isFinite(Stream.iterate(1, x -> x + 1).limit(5)));
-        System.out.println("Для неограниченного потока вызов зависнет — поэтому идея плохая.");
     }
 }

@@ -8,7 +8,7 @@ public class AdjacentDistinct {
     public static <T> Stream<T> distinctAdjacent(Stream<T> stream) {
         return stream.filter(new Predicate<>() {
             private T previous;
-            private boolean first = true;
+            private boolean first = true; // для корректной обработки первого null
 
             @Override
             public boolean test(T value) {
@@ -28,6 +28,5 @@ public class AdjacentDistinct {
 
         // В parallelStream() filter хранит состояние и зависит от порядка,
         // поэтому для параллельного потока метод не подходит.
-        System.out.println("Параллельный поток не поддерживается: важен порядок элементов.");
     }
 }
