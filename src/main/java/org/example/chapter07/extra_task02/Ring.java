@@ -1,19 +1,19 @@
 package org.example.chapter07.extra_task02;
 
+import java.util.Collection;
+
 /**
- * Неограниченное кольцо: элементы хранятся в порядке добавления,
- * remove() удаляет самый старый, iterator() — полноценный ListIterator.
+ * Кольцо: коллекция с доступом по индексу.
+ * add() добавляет элемент в конец, remove() удаляет самый старый элемент.
+ * Итератор конечный и подчиняется обычным правилам Collection/ListIterator.
  */
-public interface Ring<E> extends Iterable<E> {
-    void add(E element);
+public interface Ring<E> extends Collection<E> {
+    @Override
+    boolean add(E element);
 
     E remove();
 
     E get(int index);
-
-    int size();
-
-    boolean isEmpty();
 
     @Override
     RingIterator<E> iterator();

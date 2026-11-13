@@ -1,17 +1,18 @@
 package org.example.chapter07.extra_task02;
 
+import java.util.AbstractCollection;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.StringJoiner;
 
-public class ArrayRing<E> implements Ring<E> {
+public class ArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
     private Object[] elements = new Object[10];
     private int head; // индекс самого старого элемента
     private int size;
 
     @Override
-    public void add(E element) {
+    public boolean add(E element) {
         insertAt(size, element);
+        return true;
     }
 
     @Override
@@ -33,22 +34,8 @@ public class ArrayRing<E> implements Ring<E> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
     public RingIterator<E> iterator() {
         return new Itr();
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner result = new StringJoiner(", ", "[", "]");
-        for (E element : this) {
-            result.add(String.valueOf(element));
-        }
-        return result.toString();
     }
 
     private void insertAt(int index, E element) {
