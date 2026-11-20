@@ -6,22 +6,21 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.stream.Stream;
 
+import static org.example.chapter08.task07.FileWords.words;
+
 public class FiveVowels {
     public static String[] fiveVowelWords(Path path) throws Exception {
-        try (Stream<String> lines = Files.lines(path)) {
-            return lines
-                    .flatMap(line -> Arrays.stream(line.split("\\s+")))
-                    .map(word -> word.toLowerCase(Locale.ROOT))
-                    .filter(FiveVowels::hasFiveDistinctVowels)
-                    .toArray(String[]::new);
+        try (Stream<String> words = words(path)) {
+            return words.map(String::toLowerCase)
+                        .filter(FiveVowels::hasFiveDistinctVowels)
+                        .toArray(String[]::new);
         }
     }
 
     private static boolean hasFiveDistinctVowels(String word) {
-        return word.chars()
-                .filter(c -> "aeiou".indexOf(c) >= 0)
-                .distinct()
-                .count() == 5;
+        return word.chars().filter(c -> "aeiou".indexOf(c) >= 0)
+                           .distinct()
+                           .count() == 5;
     }
 
     static void main() throws Exception {

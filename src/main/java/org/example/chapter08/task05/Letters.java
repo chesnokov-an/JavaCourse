@@ -14,3 +14,10 @@ public class Letters {
         System.out.println(letters("Привет").toList());
     }
 }
+
+//  public static Stream<String> letters(String s) {
+//      List<String> result = new ArrayList<>();
+//      for (int i = 0; i < s.length(); i++)
+//          result.add(s.substring(i, i + 1));
+//      return result.stream0;
+//  }

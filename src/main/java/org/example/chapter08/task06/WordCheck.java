@@ -15,7 +15,7 @@ public class WordCheck {
         String[] samples = {"Hello", "Привет", "Java16", "16Java", "_name", "hello-world", ""};
 
         for (String sample : samples) {
-            System.out.printf("%-12s слово: %-5s идентификатор: %s%n",
+            System.out.printf("%-13s слово: %-5s идентификатор: %s%n",
                     "\"" + sample + "\"", isWord(sample), isJavaIdentifier(sample));
         }
     }

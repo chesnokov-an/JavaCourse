@@ -17,6 +17,6 @@ public class FiniteCheck {
     static void main() {
         System.out.println("Конечный поток: " + isFinite(Stream.of(1, 2, 3)));
         System.out.println("Ограниченный Stream.iterate: "
-                + isFinite(Stream.iterate(1, x -> x + 1).limit(5)));
+                + isFinite(Stream.iterate(1, x -> x + 1).limit(5))); // можно убрать limit и ждать overflow :)
     }
 }

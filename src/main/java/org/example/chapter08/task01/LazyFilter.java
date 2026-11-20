@@ -5,30 +5,26 @@ import java.util.stream.Stream;
 
 public class LazyFilter {
     public static List<String> firstLongWords(Stream<String> words, int count) {
-        return words
-                .filter(word -> {
-                    System.out.println("filter: " + word);
+        return words.filter(word -> {
+                    System.out.println("filter: " + word + " - " + word.length());
                     return word.length() > 12;
                 })
-                .map(word -> {
-                    System.out.println("map: " + word);
-                    return word;
-                })
+                .peek(word -> System.out.println("map: " + word))
                 .limit(count)
                 .toList();
     }
 
     static void main() {
         List<String> words = List.of(
-                "java",
-                "программирование",
-                "функциональный",
+                "мама",
+                "карбюратор",
+                "Программирование",
                 "преобразование",
-                "бесконечность",
+                "претидижитатор",
                 "интернационализация",
                 "переосмысление",
                 "характеристика",
-                "stream");
+                "потокииии");
 
         System.out.println(firstLongWords(words.stream(), 5));
     }

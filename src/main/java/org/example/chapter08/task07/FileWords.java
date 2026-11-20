@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 public class FileWords {
     public static Stream<String> words(Path path) throws Exception {
         return Files.lines(path)
-                .flatMap(line -> Arrays.stream(line.split("\\s+")))
+                .flatMap(line -> Arrays.stream(line.split(" ")))
                 .filter(WordCheck::isWord);
     }
 
@@ -29,13 +28,11 @@ public class FileWords {
 
         Map<String, Long> counts;
         try (Stream<String> words = words(path)) {
-            counts = words
-                    .map(word -> word.toLowerCase(Locale.ROOT))
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            counts = words.map(String::toLowerCase)
+                          .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         }
 
-        System.out.println();
-        System.out.println("10 самых частых слов:");
+        System.out.println("\n10 самых частых слов:");
         counts.entrySet().stream()
                 .sorted(Comparator.comparingLong((Map.Entry<String, Long> entry) -> entry.getValue())
                         .reversed()

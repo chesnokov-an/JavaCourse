@@ -8,12 +8,10 @@ public class AdjacentDistinct {
     public static <T> Stream<T> distinctAdjacent(Stream<T> stream) {
         return stream.filter(new Predicate<>() {
             private T previous;
-            private boolean first = true; // для корректной обработки первого null
 
             @Override
             public boolean test(T value) {
-                if (first || !Objects.equals(previous, value)) {
-                    first = false;
+                if (!Objects.equals(previous, value)) {
                     previous = value;
                     return true;
                 }
@@ -23,7 +21,7 @@ public class AdjacentDistinct {
     }
 
     static void main() {
-        Stream<String> words = Stream.of("a", "a", "b", "b", "a", "c", "c");
+        Stream<String> words = Stream.of("aaa", "aaa", "bbb", "bbb", "aaa", "ccc", "ccc");
         System.out.println(distinctAdjacent(words).toList());
 
         // В parallelStream() filter хранит состояние и зависит от порядка,

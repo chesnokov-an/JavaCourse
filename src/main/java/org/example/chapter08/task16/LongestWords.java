@@ -1,33 +1,24 @@
 package org.example.chapter08.task16;
 
-import org.example.chapter08.task06.WordCheck;
-
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.example.chapter08.task07.FileWords.words;
+
 public class LongestWords {
     public static List<String> longestWords(List<String> words, int count, boolean parallel) {
         Stream<String> stream = parallel ? words.parallelStream() : words.stream();
-        return stream
-                .distinct()
-                .sorted(Comparator.comparingInt(String::length).reversed())
-                .limit(count)
-                .toList();
+        return stream.distinct()
+                     .sorted(Comparator.comparingInt(String::length).reversed())
+                     .limit(count)
+                     .toList();
     }
 
     static void main() throws Exception {
         Path path = Path.of("src/main/java/org/example/chapter08/task16/war_and_peace.txt");
-        List<String> words;
-        try (Stream<String> lines = Files.lines(path)) {
-            words = lines
-                    .flatMap(line -> Arrays.stream(line.split("\\s+")))
-                    .filter(WordCheck::isWord)
-                    .toList();
-        }
+        List<String> words = words(path).toList();
 
         long start = System.currentTimeMillis();
         List<String> sequential = longestWords(words, 500, false);

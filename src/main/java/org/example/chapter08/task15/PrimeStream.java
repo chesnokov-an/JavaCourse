@@ -14,25 +14,21 @@ public class PrimeStream {
             // unordered позволяет не сохранять порядок и эффективно распараллелить limit()
             candidates = candidates.parallel().unordered();
         }
-
-        return candidates
-                .filter(number -> number.isProbablePrime(100))
-                .limit(count)
-                .toList();
+        return candidates.filter(number -> number.isProbablePrime(100))
+                         .limit(count)
+                         .toList();
     }
 
-    private static long measure(int count, boolean parallel) {
+    private static void measure(boolean parallel) {
         long start = System.currentTimeMillis();
-        List<BigInteger> primes = findPrimes(count, 50, parallel);
+        List<BigInteger> primes = findPrimes(500, 50, parallel);
         long elapsed = System.currentTimeMillis() - start;
 
-        System.out.println((parallel ? "parallel" : "sequential") + ": "
-                + elapsed + " мс, найдено " + primes.size() + " простых чисел");
-        return elapsed;
+        System.out.println((parallel ? "параллельно" : "последовательно") + ": " + elapsed + " мс");
     }
 
     static void main() {
-        long sequential = measure(500, false);
-        long parallel = measure(500, true);
+        measure(false);
+        measure(true);
     }
 }

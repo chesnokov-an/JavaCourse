@@ -17,7 +17,7 @@ public class StreamBenchmark {
     static void main() throws Exception {
         Path path = Path.of("src/main/java/org/example/chapter08/task16/war_and_peace.txt");
         List<String> words = Files.readAllLines(path).stream()
-                .flatMap(line -> Arrays.stream(line.split("\\s+")))
+                .flatMap(line -> Arrays.stream(line.split(" ")))
                 .filter(WordCheck::isWord)
                 .toList();
 
