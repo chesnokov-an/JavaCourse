@@ -35,7 +35,12 @@ public class ArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
 
     @Override
     public RingIterator<E> iterator() {
-        return new Itr();
+        return new Itr(false);
+    }
+
+    @Override
+    public RingIterator<E> ringIterator() {
+        return new Itr(true);
     }
 
     private void insertAt(int index, E element) {
@@ -83,18 +88,29 @@ public class ArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
     }
 
     private class Itr implements RingIterator<E> {
+        private final boolean cyclic;
         private int cursor;
         private int lastReturned = -1;
 
+        Itr(boolean cyclic) {
+            this.cyclic = cyclic;
+        }
+
         @Override
         public boolean hasNext() {
-            return cursor < size;
+            return cyclic ? size > 0 : cursor < size;
         }
 
         @Override
         public E next() {
-            if (!hasNext()) {
+            if (size == 0) {
                 throw new NoSuchElementException();
+            }
+            if (cursor == size) {
+                if (!cyclic) {
+                    throw new NoSuchElementException();
+                }
+                cursor = 0;
             }
             E element = elementAt(cursor);
             lastReturned = cursor;
@@ -104,13 +120,19 @@ public class ArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
 
         @Override
         public boolean hasPrevious() {
-            return cursor > 0;
+            return cyclic ? size > 0 : cursor > 0;
         }
 
         @Override
         public E previous() {
-            if (!hasPrevious()) {
+            if (size == 0) {
                 throw new NoSuchElementException();
+            }
+            if (cursor == 0) {
+                if (!cyclic) {
+                    throw new NoSuchElementException();
+                }
+                cursor = size;
             }
             lastReturned = --cursor;
             return elementAt(cursor);
@@ -118,12 +140,18 @@ public class ArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
 
         @Override
         public int nextIndex() {
-            return cursor;
+            if (size == 0) {
+                return 0;
+            }
+            return cyclic ? cursor % size : cursor;
         }
 
         @Override
         public int previousIndex() {
-            return cursor - 1;
+            if (size == 0) {
+                return -1;
+            }
+            return cyclic ? (cursor - 1 + size) % size : cursor - 1;
         }
 
         @Override

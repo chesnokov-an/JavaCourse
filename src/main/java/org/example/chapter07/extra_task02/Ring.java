@@ -5,7 +5,6 @@ import java.util.Collection;
 /**
  * Кольцо: коллекция с доступом по индексу.
  * add() добавляет элемент в конец, remove() удаляет самый старый элемент.
- * Итератор конечный и подчиняется обычным правилам Collection/ListIterator.
  */
 public interface Ring<E> extends Collection<E> {
     @Override
@@ -17,4 +16,5 @@ public interface Ring<E> extends Collection<E> {
 
     @Override
     RingIterator<E> iterator();
+    RingIterator<E> ringIterator();
 }
